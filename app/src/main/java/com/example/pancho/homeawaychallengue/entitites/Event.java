@@ -4,9 +4,10 @@ package com.example.pancho.homeawaychallengue.entitites;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class Event implements Parcelable {
 
@@ -66,7 +67,7 @@ public class Event implements Parcelable {
     private Double popularity;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private String id;
     @SerializedName("datetime_local")
     @Expose
     private String datetimeLocal;
@@ -82,6 +83,7 @@ public class Event implements Parcelable {
         url = in.readString();
         announceDate = in.readString();
         createdAt = in.readString();
+        id = in.readString();
         datetimeLocal = in.readString();
         shortTitle = in.readString();
     }
@@ -242,11 +244,11 @@ public class Event implements Parcelable {
         this.popularity = popularity;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -280,6 +282,7 @@ public class Event implements Parcelable {
         parcel.writeString(url);
         parcel.writeString(announceDate);
         parcel.writeString(createdAt);
+        parcel.writeString(id);
         parcel.writeString(datetimeLocal);
         parcel.writeString(shortTitle);
     }

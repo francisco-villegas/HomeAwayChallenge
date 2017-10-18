@@ -113,7 +113,7 @@ public class MainView extends AppCompatActivity implements MainContract.View, Fi
     private void setupDaggerComponent() {
         DaggerMainComponent.builder()
                 .sharedPreferencesComponent(((App) getApplicationContext()).getSharePreferencesComponent())
-                .mainModule(new MainModule(this))
+                .mainModule(new MainModule())
                 .build()
                 .insert(this);
 
@@ -121,7 +121,7 @@ public class MainView extends AppCompatActivity implements MainContract.View, Fi
     }
 
     private void initPresenter() {
-//        presenter.attachView(this);
+        presenter.attachView(this);
         presenter.attachRemote();
     }
 
@@ -164,7 +164,7 @@ public class MainView extends AppCompatActivity implements MainContract.View, Fi
                     Toast.makeText(this, "You have to type anything before press the search button", Toast.LENGTH_SHORT).show();
                 } else {
                     this.query = query;
-                    presenter.makeRestCall(true, query);
+                    presenter.makeRestCall(query);
                 }
 
                 break;

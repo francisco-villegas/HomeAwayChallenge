@@ -1,11 +1,15 @@
 
 package com.example.pancho.homeawaychallengue.entitites;
 
-import java.util.List;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Performer {
+import java.util.List;
+
+public class Performer implements Parcelable{
 
     @SerializedName("primary")
     @Expose
@@ -67,6 +71,44 @@ public class Performer {
     @SerializedName("id")
     @Expose
     private Integer id;
+
+    protected Performer(Parcel in) {
+        image = in.readString();
+        name = in.readString();
+        slug = in.readString();
+        shortName = in.readString();
+        type = in.readString();
+        url = in.readString();
+        imageAttribution = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(image);
+        dest.writeString(name);
+        dest.writeString(slug);
+        dest.writeString(shortName);
+        dest.writeString(type);
+        dest.writeString(url);
+        dest.writeString(imageAttribution);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Performer> CREATOR = new Creator<Performer>() {
+        @Override
+        public Performer createFromParcel(Parcel in) {
+            return new Performer(in);
+        }
+
+        @Override
+        public Performer[] newArray(int size) {
+            return new Performer[size];
+        }
+    };
 
     public Boolean getPrimary() {
         return primary;

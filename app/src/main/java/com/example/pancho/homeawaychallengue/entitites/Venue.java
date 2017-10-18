@@ -1,11 +1,15 @@
 
 package com.example.pancho.homeawaychallengue.entitites;
 
-import java.util.List;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Venue {
+import java.util.List;
+
+public class Venue implements Parcelable {
 
     @SerializedName("popularity")
     @Expose
@@ -64,6 +68,33 @@ public class Venue {
     @SerializedName("location")
     @Expose
     private Location location;
+
+    protected Venue(Parcel in) {
+        country = in.readString();
+        city = in.readString();
+        extendedAddress = in.readString();
+        displayLocation = in.readString();
+        address = in.readString();
+        state = in.readString();
+        nameV2 = in.readString();
+        timezone = in.readString();
+        postalCode = in.readString();
+        name = in.readString();
+        slug = in.readString();
+        url = in.readString();
+    }
+
+    public static final Creator<Venue> CREATOR = new Creator<Venue>() {
+        @Override
+        public Venue createFromParcel(Parcel in) {
+            return new Venue(in);
+        }
+
+        @Override
+        public Venue[] newArray(int size) {
+            return new Venue[size];
+        }
+    };
 
     public Double getPopularity() {
         return popularity;
@@ -217,4 +248,24 @@ public class Venue {
         this.location = location;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(country);
+        parcel.writeString(city);
+        parcel.writeString(extendedAddress);
+        parcel.writeString(displayLocation);
+        parcel.writeString(address);
+        parcel.writeString(state);
+        parcel.writeString(nameV2);
+        parcel.writeString(timezone);
+        parcel.writeString(postalCode);
+        parcel.writeString(name);
+        parcel.writeString(slug);
+        parcel.writeString(url);
+    }
 }

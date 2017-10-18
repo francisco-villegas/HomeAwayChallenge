@@ -1,21 +1,14 @@
 package com.example.pancho.homeawaychallengue.view.detailsview;
 
-import com.example.pancho.homeawaychallengue.entitites.Event;
-import com.example.pancho.homeawaychallengue.injection.details.detailspresenter.DaggerDetailsPresenterComponent;
-import com.example.pancho.homeawaychallengue.injection.details.detailspresenter.DetailsPresenterModule;
-import com.example.pancho.homeawaychallengue.model.IRemote;
-import com.example.pancho.homeawaychallengue.model.Remote;
+import com.example.pancho.homeawaychallengue.entitites.DaoSession;
+import com.example.pancho.homeawaychallengue.entitites.Likes;
+import com.example.pancho.homeawaychallengue.entitites.LikesDao;
 
-import java.util.List;
+import org.greenrobot.greendao.query.DeleteQuery;
 
-import javax.inject.Inject;
-
-public class DetailsPresenter implements DetailsContract.Presenter, IRemote {
+public class DetailsPresenter implements DetailsContract.Presenter {
     DetailsContract.View view;
     private static final String TAG = "DetailsPresenter";
-
-    @Inject
-    public Remote remote;
 
     @Override
     public void attachView(DetailsContract.View view) {
@@ -28,21 +21,22 @@ public class DetailsPresenter implements DetailsContract.Presenter, IRemote {
     }
 
     @Override
-    public void attachRemote(){
-        DaggerDetailsPresenterComponent
-                .builder()
-                .detailsPresenterModule(new DetailsPresenterModule(this))
-                .build()
-                .insert(this);
+    public void localquery(DaoSession daoSession, String id) {
+        view.sendResult(daoSession.queryBuilder(Likes.class)
+                .where(LikesDao.Properties.Id.eq(id))
+                .list());
     }
 
     @Override
-    public void sendError(String s) {
-
-    }
-
-    @Override
-    public void sendInfo(List<Event> events) {
-
+    public void saveChecked(DaoSession daoSession, boolean checked, String id) {
+        if(checked)
+            daoSession.insert(new Likes(null, id));
+        else {
+            final DeleteQuery<Likes> tableDeleteQuery = daoSession.queryBuilder(Likes.class)
+                    .where(LikesDao.Properties.Id.eq(id))
+                    .buildDelete();
+            tableDeleteQuery.executeDeleteWithoutDetachingEntities();
+            daoSession.clear();
+        }
     }
 }

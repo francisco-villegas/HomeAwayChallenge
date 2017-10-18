@@ -1,6 +1,6 @@
 package com.example.pancho.homeawaychallengue.injection.main.mainpresenter;
 
-import com.example.pancho.homeawaychallengue.model.Remote;
+import com.example.pancho.homeawaychallengue.model.remote.Remote;
 import com.example.pancho.homeawaychallengue.view.mainview.MainPresenter;
 
 import dagger.Module;

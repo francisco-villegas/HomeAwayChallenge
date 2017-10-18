@@ -1,6 +1,7 @@
 package com.example.pancho.homeawaychallengue.view.mainview;
 
 
+import com.example.pancho.homeawaychallengue.BasePresenter;
 import com.example.pancho.homeawaychallengue.BaseView;
 import com.example.pancho.homeawaychallengue.entitites.Event;
 
@@ -12,10 +13,10 @@ public interface MainContract {
         void sendInfo(List<Event> events);
     }
 
-    interface Presenter {
+    interface Presenter extends BasePresenter<View> {
 
         void attachRemote();
 
-        void makeRestCall(boolean force, String query);
+        void makeRestCall(String query);
     }
 }

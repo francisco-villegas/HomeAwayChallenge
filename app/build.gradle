@@ -10,6 +10,7 @@ buildscript {
 
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
+apply plugin: 'org.greenrobot.greendao'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
@@ -107,4 +108,19 @@ dependencies {
 
     //CustomLike
     compile 'com.github.varunest:sparkbutton:1.0.5'
+
+    //Retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    //RxJava
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.2'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
+    //GreenDAO
+    compile 'org.greenrobot:greendao:3.2.2'
+
+    //Circle Image
+    compile 'com.mikhaellopez:circularimageview:3.0.2'
 }
