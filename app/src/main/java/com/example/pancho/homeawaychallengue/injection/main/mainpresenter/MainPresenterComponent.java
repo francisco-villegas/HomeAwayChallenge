@@ -7,6 +7,10 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
+/**
+ * Created by Francisco on 10/18/2017.
+ */
+
 @Singleton
 @Component(modules = {MainPresenterModule.class, RemoteModule.class} )
 public interface MainPresenterComponent {

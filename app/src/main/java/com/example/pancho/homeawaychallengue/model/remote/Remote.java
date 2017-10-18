@@ -15,6 +15,10 @@ import static com.example.pancho.homeawaychallengue.util.CONSTANTS.CLIENT_SECRET
 import static com.example.pancho.homeawaychallengue.util.CONSTANTS.PATH_SEATGEEK;
 import static com.example.pancho.homeawaychallengue.util.CONSTANTS.Q_WORD;
 
+/**
+ * Created by Francisco on 10/18/2017.
+ */
+
 public class Remote {
 
     private static final String TAG = "Remote";
@@ -24,51 +28,15 @@ public class Remote {
         this.iremote = iremote;
     }
 
-    public void getInfo(boolean force, String query) {
-//        OkHttpClient client = new OkHttpClient();
-//        HttpUrl url = new HttpUrl.Builder()
-//                .scheme(BASE_SCHEMA_SEATGEEK)
-//                .host(BASE_URL_SEATGEEK)
-//                .addPathSegments(PATH_SEATGEEK)
-//                .addQueryParameter(CLIENT_ID_WORD,CLIENT_ID)
-//                .addQueryParameter(CLIENT_SECRET_WORD,CLIENT_SECRET)
-//                .addQueryParameter(Q_WORD, query)
-//                .build();
-//        Request request = new Request.Builder()
-//                .url(url)
-//                .build();
-//        Log.i(TAG, "URL: " + url.toString());
-//        client.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                Log.d(TAG, "onFailure: " + e.toString());
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                Gson gson = new Gson();
-//                String r = response.body().string();
-//                try {
-//                    final SeatGeek seatGeek = gson.fromJson(r, SeatGeek.class);
-//
-//                    //UpdateUI
-//                    iremote.sendInfo(seatGeek.getSeatGeeks());
-//
-//                } catch (Exception ex) {
-//                    ex.printStackTrace();
-//                    Log.d(TAG, "onResponse: " + r);
-//                    iremote.sendError("Failed");
-//                }
-//            }
-//        });
-    }
 
+    /** Get remote data using retrofit call */
     //Receive user if we want to search a user here
     public void getSeatGeekCall(Retrofit retrofit, String query){
         IResponse iResponse = retrofit.create(IResponse.class);
         iremote.sendCall(iResponse.getSeatGeekdata(CLIENT_ID, CLIENT_SECRET, query));
     }
 
+    /** Get remote data using rxjava observable */
     public void getSeatGeekObs(Retrofit retrofit, String query){
         IResponse iResponse = retrofit.create(IResponse.class);
         iremote.sendObservable(iResponse.getSeatGeekObservable(CLIENT_ID, CLIENT_SECRET, query));

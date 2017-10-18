@@ -1,127 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:fillViewport="true">
+    <android.support.constraint.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
-        android:background="@android:color/white"
-        app:cardElevation="10dp"
-        android:layout_marginRight="2dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="2dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="0dp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/cardView2">
+        <android.support.v7.widget.CardView
+            android:background="@android:color/white"
+            app:cardElevation="10dp"
+            android:layout_marginRight="2dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="2dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardView2">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <com.varunest.sparkbutton.SparkButton
-                android:id="@+id/hearth_button"
-                android:layout_gravity="right"
-                android:layout_marginRight="20dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:sparkbutton_activeImage="@drawable/ic_heart_on"
-                app:sparkbutton_inActiveImage="@drawable/ic_heart_off"
-                app:sparkbutton_iconSize="30dp"
-                app:sparkbutton_primaryColor="@color/bootstrap_brand_danger"
-                app:sparkbutton_secondaryColor="@color/bootstrap_brand_warning" />
+                <com.varunest.sparkbutton.SparkButton
+                    android:id="@+id/hearth_button"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:sparkbutton_activeImage="@drawable/ic_heart_on"
+                    app:sparkbutton_inActiveImage="@drawable/ic_heart_off"
+                    app:sparkbutton_iconSize="30dp"
+                    app:sparkbutton_primaryColor="@color/bootstrap_brand_danger"
+                    app:sparkbutton_secondaryColor="@color/bootstrap_brand_warning"
+                    tools:ignore="RtlHardcoded" />
 
-        </android.support.v7.widget.Toolbar>
-    </android.support.v7.widget.CardView>
+            </android.support.v7.widget.Toolbar>
+        </android.support.v7.widget.CardView>
 
-    <TextView
-        android:id="@+id/tvLocation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:text="  phonenumber"
-        android:textAppearance="@style/TextLabel"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDate"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="16dp" />
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:drawableLeft="@drawable/ic_location"
+            android:textAppearance="@style/TextLabel"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            tools:ignore="RtlHardcoded" />
 
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_height="24dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:gravity="bottom"
-        android:text="   MOBILE"
-        android:drawableLeft="@drawable/ic_heart_on"
-        android:textAppearance="@style/TextLabel"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"
-        android:layout_width="0dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        <TextView
+            android:id="@+id/tvScore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:drawableLeft="@drawable/ic_star"
+            android:textAppearance="@style/TextLabel"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLocation"
+            tools:ignore="RtlHardcoded" />
 
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center"
-        android:textAppearance="@style/TextLabel"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/btnBackground" />
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_height="24dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:gravity="bottom"
+            android:drawableLeft="@drawable/ic_date"
+            android:textAppearance="@style/TextLabel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextLabel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/btnBackground" />
 
 
-    <ImageView
-        android:id="@+id/btnBackground"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="0dp"
-        android:scaleType="fitXY"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2"
-        app:srcCompat="@drawable/morado" />
+        <ImageView
+            android:id="@+id/btnBackground"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="0dp"
+            android:scaleType="fitXY"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2"
+            app:srcCompat="@drawable/morado"
+            android:contentDescription="@string/background" />
 
-    <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/image"
-        android:layout_width="150dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_heart_on"
-        app:civ_border_color="#ab0658"
-        app:civ_border_width="2dp"
-        app:civ_shadow="true"
-        app:civ_shadow_color="#000000"
-        app:civ_shadow_radius="5"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnBackground"
-        android:layout_marginTop="32dp"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/btnBackground"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnBackground"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintVertical_bias="0.0" />
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/image"
+            android:layout_width="250dp"
+            android:layout_height="0dp"
+            app:civ_border_color="#ab0658"
+            app:civ_border_width="2dp"
+            app:civ_shadow="true"
+            app:civ_shadow_color="#000000"
+            app:civ_shadow_radius="5"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnBackground"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="@+id/btnBackground"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBackground"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintVertical_bias="0.0" />
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

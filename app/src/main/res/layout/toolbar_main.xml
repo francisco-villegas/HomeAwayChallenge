@@ -11,8 +11,8 @@
         android:background="@android:color/white">
 
         <EditText
-            android:backgroundTint="@android:color/white"
-            android:hint="Search an event in the US"
+            android:background="@android:color/white"
+            android:hint="@string/toolbar_hint"
             android:id="@+id/ettoolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

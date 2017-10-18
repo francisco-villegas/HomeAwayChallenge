@@ -1,8 +1,6 @@
 package com.example.pancho.homeawaychallengue.view.mainview;
 
-
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,9 +18,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+/**
+ * Created by Francisco on 10/18/2017.
+ */
 
 public class FirstAdapter extends RecyclerView.Adapter<FirstAdapter.ViewHolder>{
     private static final String TAG = "FirstAdapter";

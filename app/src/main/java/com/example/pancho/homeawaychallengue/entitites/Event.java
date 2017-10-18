@@ -76,8 +76,10 @@ public class Event implements Parcelable {
     private String shortTitle;
 
     protected Event(Parcel in) {
+        venue = in.readParcelable(Venue.class.getClassLoader());
         datetimeUtc = in.readString();
         visibleUntilUtc = in.readString();
+        performers = in.createTypedArrayList(Performer.CREATOR);
         title = in.readString();
         type = in.readString();
         url = in.readString();
@@ -86,6 +88,27 @@ public class Event implements Parcelable {
         id = in.readString();
         datetimeLocal = in.readString();
         shortTitle = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(venue, flags);
+        dest.writeString(datetimeUtc);
+        dest.writeString(visibleUntilUtc);
+        dest.writeTypedList(performers);
+        dest.writeString(title);
+        dest.writeString(type);
+        dest.writeString(url);
+        dest.writeString(announceDate);
+        dest.writeString(createdAt);
+        dest.writeString(id);
+        dest.writeString(datetimeLocal);
+        dest.writeString(shortTitle);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Event> CREATOR = new Creator<Event>() {
@@ -266,24 +289,5 @@ public class Event implements Parcelable {
 
     public void setShortTitle(String shortTitle) {
         this.shortTitle = shortTitle;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(datetimeUtc);
-        parcel.writeString(visibleUntilUtc);
-        parcel.writeString(title);
-        parcel.writeString(type);
-        parcel.writeString(url);
-        parcel.writeString(announceDate);
-        parcel.writeString(createdAt);
-        parcel.writeString(id);
-        parcel.writeString(datetimeLocal);
-        parcel.writeString(shortTitle);
     }
 }

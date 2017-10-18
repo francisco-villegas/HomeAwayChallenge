@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">HomeAwayChallengue</string>
     <string name="settings">settings</string>
+    <string name="background">Background</string>
+    <string name="t1">1232</string>
+    <string name="t2">3212213</string>
+    <string name="t3">3212213</string>
+    <string name="toolbar_hint">Search an event in the US</string>
 </resources>

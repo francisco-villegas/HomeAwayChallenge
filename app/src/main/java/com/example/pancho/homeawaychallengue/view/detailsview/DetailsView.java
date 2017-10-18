@@ -37,6 +37,10 @@ import butterknife.ButterKnife;
 
 import static com.example.pancho.homeawaychallengue.util.CONSTANTS.EVENT_DETAILS;
 
+/**
+ * Created by Francisco on 10/18/2017.
+ */
+
 public class DetailsView extends AppCompatActivity implements DetailsContract.View, SparkEventListener {
 
     private static final String TAG = "DetailsView";
@@ -59,6 +63,8 @@ public class DetailsView extends AppCompatActivity implements DetailsContract.Vi
     TextView tvName;
     @BindView(R.id.image)
     CircularImageView image;
+    @BindView(R.id.tvScore)
+    TextView tvScore;
     private String query;
     private Event event;
 
@@ -87,9 +93,41 @@ public class DetailsView extends AppCompatActivity implements DetailsContract.Vi
         hearthButton.setEventListener(this);
     }
 
+    /**
+     * Enable the notification bar, is not appearing in some android versions and with this we forced it
+     **/
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void initNotificationBar() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.bootstrap_gray_light));
+    }
+
+
+    /**
+     * Dagger setup with the presenter and the sharepreferences
+     **/
+    private void setupDaggerComponent() {
+        DaggerDetailsComponent.builder()
+                .detailsModule(new DetailsModule())
+                .sharedPreferencesComponent(((App) getApplicationContext()).getSharePreferencesComponent())
+                .build()
+                .insert(this);
+    }
+
+    /**
+     * Receive the response from the previous activity
+     **/
+    public void getDataIntent() {
+        query = getIntent().getAction();
+        event = getIntent().getParcelableExtra(EVENT_DETAILS);
+    }
+
+    /**
+     * Prints all the data that we received from the previous activity
+     **/
     private void printData() {
         String url_img = event.getPerformers().get(0).getImage();
-        if(url_img != null)
+        if (url_img != null)
             Picasso.with(getApplicationContext()).load(url_img).into(image);
         else
             Picasso.with(getApplicationContext()).load(R.drawable.broken_image).into(image);
@@ -108,31 +146,17 @@ public class DetailsView extends AppCompatActivity implements DetailsContract.Vi
             tvLocation.setText(event.getAnnounceDate());
         else
             tvLocation.setVisibility(tvLocation.getRootView().GONE);
+
+        if (!event.getVenue().getScore().trim().equals("null"))
+            tvScore.setText(String.valueOf(event.getVenue().getScore()));
+        else
+            tvScore.setText("0");
     }
+
 
     /**
-     * Enable the notification bar, is not appearing in some android versions and with this we forced it
+     * Draw the backbutton at the top-left of the screen and perform the back operation
      **/
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void initNotificationBar() {
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.bootstrap_gray_light));
-    }
-
-
-    private void setupDaggerComponent() {
-        DaggerDetailsComponent.builder()
-                .detailsModule(new DetailsModule())
-                .sharedPreferencesComponent(((App) getApplicationContext()).getSharePreferencesComponent())
-                .build()
-                .insert(this);
-    }
-
-    public void getDataIntent() {
-        query = getIntent().getAction();
-        event = getIntent().getParcelableExtra(EVENT_DETAILS);
-    }
-
     private void setToolbarBackPressed() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -151,15 +175,24 @@ public class DetailsView extends AppCompatActivity implements DetailsContract.Vi
         presenter.attachView(this);
     }
 
+    /**
+     * Send an action to the presenter to verify if the element has a like or not
+     **/
     private void initColor() {
         presenter.localquery(((App) getApplication()).getDaoSession(), event.getId());
     }
 
+    /**
+     * Fires the errors
+     **/
     @Override
     public void showError(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Inflate the menu
+     **/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -180,6 +213,10 @@ public class DetailsView extends AppCompatActivity implements DetailsContract.Vi
         return true;
     }
 
+    /**
+     * Sends the result after checking the color
+     *      If the result is not null or is greater than 0 then check the hearth
+     **/
     @Override
     public void sendResult(List<Likes> likes) {
         if (likes != null && likes.size() > 0) {
@@ -187,6 +224,10 @@ public class DetailsView extends AppCompatActivity implements DetailsContract.Vi
         }
     }
 
+
+    /**
+     * Listeners replacing OnclickListener from the custom hearth
+     **/
     @Override
     public void onEvent(ImageView button, boolean buttonState) {
         Log.d(TAG, "onViewClicked: " + buttonState);

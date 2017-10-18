@@ -1,12 +1,15 @@
 package com.example.pancho.homeawaychallengue.view.detailsview;
 
-
 import com.example.pancho.homeawaychallengue.BasePresenter;
 import com.example.pancho.homeawaychallengue.BaseView;
 import com.example.pancho.homeawaychallengue.entitites.DaoSession;
 import com.example.pancho.homeawaychallengue.entitites.Likes;
 
 import java.util.List;
+
+/**
+ * Created by Francisco on 10/18/2017.
+ */
 
 public interface DetailsContract {
 

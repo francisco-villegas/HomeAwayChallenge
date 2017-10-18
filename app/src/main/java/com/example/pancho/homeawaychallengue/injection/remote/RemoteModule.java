@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.example.pancho.homeawaychallengue.util.CONSTANTS.BASE_URL_SEATGEEK;
 
 /**
- * Created by Pancho on 10/18/2017.
+ * Created by Francisco on 10/18/2017.
  */
 
 @Module

@@ -7,6 +7,10 @@ import com.example.pancho.homeawaychallengue.entitites.DaoMaster;
 
 import org.greenrobot.greendao.database.Database;
 
+/**
+ * Created by Francisco on 10/18/2017.
+ */
+
 public class DbOpenHelper extends DaoMaster.OpenHelper {
 
     public DbOpenHelper(Context context, String name) {

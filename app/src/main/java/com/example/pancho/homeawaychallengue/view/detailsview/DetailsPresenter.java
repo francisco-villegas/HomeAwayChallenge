@@ -6,6 +6,10 @@ import com.example.pancho.homeawaychallengue.entitites.LikesDao;
 
 import org.greenrobot.greendao.query.DeleteQuery;
 
+/**
+ * Created by Francisco on 10/18/2017.
+ */
+
 public class DetailsPresenter implements DetailsContract.Presenter {
     DetailsContract.View view;
     private static final String TAG = "DetailsPresenter";
@@ -20,6 +24,10 @@ public class DetailsPresenter implements DetailsContract.Presenter {
         this.view = null;
     }
 
+    /**
+     * Make a query to verify if the id exists
+     *      If exists then it means that it has a like
+     **/
     @Override
     public void localquery(DaoSession daoSession, String id) {
         view.sendResult(daoSession.queryBuilder(Likes.class)
@@ -27,6 +35,9 @@ public class DetailsPresenter implements DetailsContract.Presenter {
                 .list());
     }
 
+    /**
+     * Verify if the element is checked or not to add/remove it from the db
+     **/
     @Override
     public void saveChecked(DaoSession daoSession, boolean checked, String id) {
         if(checked)

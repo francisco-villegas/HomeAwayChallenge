@@ -11,6 +11,10 @@ import com.example.pancho.homeawaychallengue.injection.sharepreferences.SharedPr
 
 import javax.inject.Inject;
 
+/**
+ * Created by Francisco on 10/18/2017.
+ */
+
 public class App extends Application {
 
     private SharedPreferencesComponent sharedPreferencesComponent;
@@ -27,10 +31,16 @@ public class App extends Application {
         setUpDaggerApp();
     }
 
+    /**
+     * Dagger App setup to use the DAOSession
+     **/
     private void setUpDaggerApp() {
         DaggerAppComponent.builder().appModule(new AppModule(this)).build().insert(this);
     }
 
+    /**
+     * Dagger sharepreferences that are being shared with all the activities
+     **/
     private void setUpDaggerSharePreferences() {
         sharedPreferencesComponent = DaggerSharedPreferencesComponent.builder()
                 .appModule(new AppModule(this))

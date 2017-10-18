@@ -1,6 +1,5 @@
 package com.example.pancho.homeawaychallengue.view.mainview;
 
-
 import com.example.pancho.homeawaychallengue.entitites.SeatGeek;
 import com.example.pancho.homeawaychallengue.injection.main.mainpresenter.DaggerMainPresenterComponent;
 import com.example.pancho.homeawaychallengue.injection.main.mainpresenter.MainPresenterModule;
@@ -17,6 +16,10 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Retrofit;
+
+/**
+ * Created by Francisco on 10/18/2017.
+ */
 
 public class MainPresenter implements MainContract.Presenter, IRemote {
 
@@ -39,7 +42,9 @@ public class MainPresenter implements MainContract.Presenter, IRemote {
         this.view = null;
     }
 
-
+    /**
+     * Setup dagger to obtain the remote connection
+     **/
     @Override
     public void attachRemote(){
         DaggerMainPresenterComponent
@@ -50,11 +55,18 @@ public class MainPresenter implements MainContract.Presenter, IRemote {
                 .insert(this);
     }
 
+    /**
+     * Make a restcall and obtain, expecting to receive an observable
+     **/
     @Override
     public void makeRestCall(String query) {
         remote.getSeatGeekObs(retrofit, query);
     }
 
+    /**
+     * Method to receive a call with retrofit not used
+     **/
+    @Deprecated
     @Override
     public void sendCall(Call<SeatGeek> call) {
         call.enqueue(new retrofit2.Callback<SeatGeek>() {
@@ -75,6 +87,10 @@ public class MainPresenter implements MainContract.Presenter, IRemote {
         });
     }
 
+    /**
+     * Method expected to be received after the restcall
+     * It sends the result to the view
+     **/
     @Override
     public void sendObservable(Observable<SeatGeek> seatGeekObservable) {
         seatGeekObservable

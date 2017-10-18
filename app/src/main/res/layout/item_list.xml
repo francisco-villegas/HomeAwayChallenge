@@ -58,13 +58,15 @@
                     card_view:layout_constraintVertical_bias="0.0"
                     android:layout_marginStart="8dp"
                     android:layout_marginRight="0dp"
-                    card_view:layout_constraintRight_toRightOf="parent">
+                    card_view:layout_constraintRight_toRightOf="parent"
+                    tools:ignore="RtlHardcoded">
 
                     <ScrollView
                         android:id="@+id/scroll"
                         android:fillViewport="true"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        tools:ignore="UselessParent">
 
                         <android.support.constraint.ConstraintLayout
                             android:layout_width="match_parent"
@@ -80,7 +82,7 @@
                                 android:layout_marginStart="8dp"
                                 android:scrollbars = "none"
                                 android:layout_marginTop="8dp"
-                                android:text="3212213"
+                                android:text="@string/t2"
                                 android:textColor="@color/bootstrap_gray_light"
                                 android:textSize="15sp"
                                 android:textStyle="bold|italic"
@@ -98,7 +100,7 @@
                                 android:layout_marginRight="32dp"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginTop="17dp"
-                                android:text="3212213"
+                                android:text="@string/t3"
                                 android:scrollbars = "none"
                                 android:textColor="@color/bootstrap_brand_primary"
                                 android:textSize="13sp"
@@ -127,7 +129,7 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="center_horizontal"
                                     android:scrollbars="none"
-                                    android:text="1232"
+                                    android:text="@string/t1"
                                     android:textColor="@android:color/black"
                                     android:textSize="20sp"
                                     android:textStyle="bold|italic" />

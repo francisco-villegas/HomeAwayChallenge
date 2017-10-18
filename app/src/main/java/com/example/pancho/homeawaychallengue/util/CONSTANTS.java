@@ -1,7 +1,7 @@
 package com.example.pancho.homeawaychallengue.util;
 
 /**
- * Created by Pancho on 10/17/2017.
+ * Created by Francisco on 10/18/2017.
  */
 
 public class CONSTANTS {
@@ -23,4 +23,6 @@ public class CONSTANTS {
     public static final String EVENT_DETAILS = "EVENT_DETAILS";
 
     public static final String DB_NAME = "greendao_demo.db";
+
+    public static final String LIST_STATE_KEY = "LIST_STATE_KEY";
 }

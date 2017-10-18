@@ -6,7 +6,7 @@ import io.reactivex.Observable;
 import retrofit2.Call;
 
 /**
- * Created by Pancho on 10/5/2017.
+ * Created by Francisco on 10/18/2017.
  */
 
 public interface IRemote {

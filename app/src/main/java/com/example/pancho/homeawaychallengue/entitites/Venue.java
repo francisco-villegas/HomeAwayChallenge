@@ -58,7 +58,7 @@ public class Venue implements Parcelable {
     private String name;
     @SerializedName("score")
     @Expose
-    private Double score;
+    private String score;
     @SerializedName("slug")
     @Expose
     private String slug;
@@ -80,8 +80,31 @@ public class Venue implements Parcelable {
         timezone = in.readString();
         postalCode = in.readString();
         name = in.readString();
+        score = in.readString();
         slug = in.readString();
         url = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(country);
+        dest.writeString(city);
+        dest.writeString(extendedAddress);
+        dest.writeString(displayLocation);
+        dest.writeString(address);
+        dest.writeString(state);
+        dest.writeString(nameV2);
+        dest.writeString(timezone);
+        dest.writeString(postalCode);
+        dest.writeString(name);
+        dest.writeString(score);
+        dest.writeString(slug);
+        dest.writeString(url);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Venue> CREATOR = new Creator<Venue>() {
@@ -216,11 +239,11 @@ public class Venue implements Parcelable {
         this.name = name;
     }
 
-    public Double getScore() {
+    public String getScore() {
         return score;
     }
 
-    public void setScore(Double score) {
+    public void setScore(String score) {
         this.score = score;
     }
 
@@ -248,24 +271,4 @@ public class Venue implements Parcelable {
         this.location = location;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(country);
-        parcel.writeString(city);
-        parcel.writeString(extendedAddress);
-        parcel.writeString(displayLocation);
-        parcel.writeString(address);
-        parcel.writeString(state);
-        parcel.writeString(nameV2);
-        parcel.writeString(timezone);
-        parcel.writeString(postalCode);
-        parcel.writeString(name);
-        parcel.writeString(slug);
-        parcel.writeString(url);
-    }
 }

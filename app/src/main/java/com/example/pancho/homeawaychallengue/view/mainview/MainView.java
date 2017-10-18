@@ -11,7 +11,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,16 +31,23 @@ import com.example.pancho.homeawaychallengue.injection.main.MainModule;
 import com.example.pancho.homeawaychallengue.view.detailsview.DetailsView;
 import com.flurry.android.FlurryAgent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import icepick.Icepick;
+import icepick.State;
 import io.fabric.sdk.android.Fabric;
 
 import static com.example.pancho.homeawaychallengue.util.CONSTANTS.EVENT_DETAILS;
 import static com.example.pancho.homeawaychallengue.util.CONSTANTS.FLURRY_API_KEY;
+
+/**
+ * Created by Francisco on 10/18/2017.
+ */
 
 public class MainView extends AppCompatActivity implements MainContract.View, FirstAdapter.EventListener {
 
@@ -64,6 +72,9 @@ public class MainView extends AppCompatActivity implements MainContract.View, Fi
 
     String query;
 
+    @State
+    ArrayList<Event> events;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,17 +95,22 @@ public class MainView extends AppCompatActivity implements MainContract.View, Fi
 
         initPresenter();
 
+        events = new ArrayList<>();
+
+        Icepick.restoreInstanceState(this, savedInstanceState);
+
         initRecyclerView();
 
-
-        prefs.edit().putBoolean("a",true);
-        Log.d(TAG, "makeRestCall: " + prefs.getBoolean("a",false));
+        EditTextEvent();
     }
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
     }
 
+    /**
+     * Enable flurry to track the user information
+     **/
     private void initFlurry() {
         new FlurryAgent.Builder()
                 .withLogEnabled(false)
@@ -110,14 +126,16 @@ public class MainView extends AppCompatActivity implements MainContract.View, Fi
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.bootstrap_gray_light));
     }
 
+
+    /**
+     * Setup dagger with the sharepreferences as a dependency
+     **/
     private void setupDaggerComponent() {
         DaggerMainComponent.builder()
                 .sharedPreferencesComponent(((App) getApplicationContext()).getSharePreferencesComponent())
                 .mainModule(new MainModule())
                 .build()
                 .insert(this);
-
-//        ((App) getApplicationContext()).getMainComponent().insert(this);
     }
 
     private void initPresenter() {
@@ -125,6 +143,10 @@ public class MainView extends AppCompatActivity implements MainContract.View, Fi
         presenter.attachRemote();
     }
 
+
+    /**
+     * Initiate recyclerview
+     **/
     private void initRecyclerView() {
         layoutManager = new LinearLayoutManager(getApplicationContext());
         itemAnimator = new DefaultItemAnimator();
@@ -134,8 +156,33 @@ public class MainView extends AppCompatActivity implements MainContract.View, Fi
         recycler.setItemViewCacheSize(20);
         recycler.setDrawingCacheEnabled(true);
         recycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+
+        firstAdapter = new FirstAdapter(events);
+        recycler.setAdapter(firstAdapter);
+        firstAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * TextWatcher to detect when a key is pressed
+     **/
+    private void EditTextEvent() {
+        ettoolbar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                presenter.makeRestCall(s.toString().trim());
+            }
+        });
+    }
+
+    /**
+     * Fire errrors
+     **/
     @Override
     public void showError(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
@@ -164,7 +211,7 @@ public class MainView extends AppCompatActivity implements MainContract.View, Fi
                     Toast.makeText(this, "You have to type anything before press the search button", Toast.LENGTH_SHORT).show();
                 } else {
                     this.query = query;
-                    presenter.makeRestCall(query);
+                    presenter.makeRestCall(query.trim());
                 }
 
                 break;
@@ -172,11 +219,16 @@ public class MainView extends AppCompatActivity implements MainContract.View, Fi
         return true;
     }
 
+    /**
+     * Receive the backend response from the presenter and populate the recyclerview
+     **/
     @Override
     public void sendInfo(List<Event> events) {
         firstAdapter = new FirstAdapter(events);
         recycler.setAdapter(firstAdapter);
         firstAdapter.notifyDataSetChanged();
+
+        this.events = new ArrayList<Event>(events);
     }
 
     /**
@@ -186,7 +238,16 @@ public class MainView extends AppCompatActivity implements MainContract.View, Fi
     public void ItemClick(Event item) {
         Intent intent = new Intent(this, DetailsView.class);
         intent.setAction(query);
-        intent.putExtra(EVENT_DETAILS,item);
+        intent.putExtra(EVENT_DETAILS, item);
         startActivity(intent);
     }
+
+    /**
+     * Save the instance of the recyclerview using Icepick
+     **/
+    @Override public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Icepick.saveInstanceState(this, outState);
+    }
+
 }
