@@ -21,6 +21,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.pancho.homeawaychallenge.util.Functions.DateConversion;
+
 /**
  * Created by Francisco on 10/18/2017.
  */
@@ -62,7 +64,7 @@ public class FirstAdapter extends RecyclerView.Adapter<FirstAdapter.ViewHolder>{
             holder.tvLocation.setVisibility(holder.tvLocation.getRootView().GONE);
 
         if (!item.getAnnounceDate().trim().equals(""))
-            holder.tvDate.setText(item.getAnnounceDate());
+            holder.tvDate.setText(DateConversion(item.getAnnounceDate()));
         else
             holder.tvDate.setVisibility(holder.tvDate.getRootView().GONE);
 

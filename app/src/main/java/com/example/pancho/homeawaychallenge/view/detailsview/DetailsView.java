@@ -36,6 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.pancho.homeawaychallenge.util.CONSTANTS.EVENT_DETAILS;
+import static com.example.pancho.homeawaychallenge.util.Functions.DateConversion;
 
 /**
  * Created by Francisco on 10/18/2017.
@@ -143,7 +144,7 @@ public class DetailsView extends AppCompatActivity implements DetailsContract.Vi
             tvDate.setVisibility(tvDate.getRootView().GONE);
 
         if (!event.getAnnounceDate().trim().equals(""))
-            tvLocation.setText(event.getAnnounceDate());
+            tvLocation.setText(DateConversion(event.getAnnounceDate()));
         else
             tvLocation.setVisibility(tvLocation.getRootView().GONE);
 
