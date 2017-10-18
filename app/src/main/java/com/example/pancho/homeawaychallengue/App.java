@@ -5,9 +5,9 @@ import android.app.Application;
 import com.example.pancho.homeawaychallengue.entitites.DaoSession;
 import com.example.pancho.homeawaychallengue.injection.app.AppModule;
 import com.example.pancho.homeawaychallengue.injection.app.DaggerAppComponent;
-import com.example.pancho.homeawaychallengue.injection.sharepreferences.DaggerSharedPreferencesComponent;
-import com.example.pancho.homeawaychallengue.injection.sharepreferences.SharePreferencesModule;
-import com.example.pancho.homeawaychallengue.injection.sharepreferences.SharedPreferencesComponent;
+import com.example.pancho.homeawaychallengue.injection.sharedpreference.DaggerSharedPreferencesComponent;
+import com.example.pancho.homeawaychallengue.injection.sharedpreference.SharedPreferencesModule;
+import com.example.pancho.homeawaychallengue.injection.sharedpreference.SharedPreferencesComponent;
 
 import javax.inject.Inject;
 
@@ -44,7 +44,7 @@ public class App extends Application {
     private void setUpDaggerSharePreferences() {
         sharedPreferencesComponent = DaggerSharedPreferencesComponent.builder()
                 .appModule(new AppModule(this))
-                .sharePreferencesModule(new SharePreferencesModule())
+                .sharedPreferencesModule(new SharedPreferencesModule())
                 .build();
     }
 
