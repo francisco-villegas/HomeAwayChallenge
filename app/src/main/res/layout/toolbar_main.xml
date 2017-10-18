@@ -14,6 +14,8 @@
             android:background="@android:color/white"
             android:hint="@string/toolbar_hint"
             android:id="@+id/ettoolbar"
+            android:maxLines="1"
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

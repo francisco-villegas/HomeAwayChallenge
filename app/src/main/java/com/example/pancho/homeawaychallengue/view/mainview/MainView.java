@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -102,6 +103,8 @@ public class MainView extends AppCompatActivity implements MainContract.View, Fi
         initRecyclerView();
 
         EditTextEvent();
+
+        EditTextEnter();
     }
 
     private void initToolbar() {
@@ -176,6 +179,22 @@ public class MainView extends AppCompatActivity implements MainContract.View, Fi
             @Override
             public void afterTextChanged(Editable s) {
                 presenter.makeRestCall(s.toString().trim());
+            }
+        });
+    }
+
+    /**
+     * EditText event to detect enter key and fires the search
+     **/
+    private void EditTextEnter() {
+        ettoolbar.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
+                //If the keyevent is a key-down event on the "enter" button
+                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    presenter.makeRestCall(ettoolbar.getText().toString().trim());
+                    return true;
+                }
+                return false;
             }
         });
     }
