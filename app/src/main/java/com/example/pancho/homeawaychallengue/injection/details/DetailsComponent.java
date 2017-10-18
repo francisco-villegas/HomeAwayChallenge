@@ -1,7 +1,7 @@
 package com.example.pancho.homeawaychallengue.injection.details;
 
 import com.example.pancho.homeawaychallengue.injection.CustomScope;
-import com.example.pancho.homeawaychallengue.injection.sharepreferences.SharedPreferencesComponent;
+import com.example.pancho.homeawaychallengue.injection.sharedpreference.SharedPreferencesComponent;
 import com.example.pancho.homeawaychallengue.view.detailsview.DetailsView;
 
 import dagger.Component;

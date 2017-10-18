@@ -1,4 +1,4 @@
-package com.example.pancho.homeawaychallengue.injection.sharepreferences;
+package com.example.pancho.homeawaychallengue.injection.sharedpreference;
 
 import android.content.SharedPreferences;
 
@@ -13,7 +13,7 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {SharePreferencesModule.class, AppModule.class})
+@Component(modules = {SharedPreferencesModule.class, AppModule.class})
 public interface SharedPreferencesComponent {
 
     SharedPreferences getSharedPreferences();
